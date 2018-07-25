@@ -32,7 +32,8 @@ function csvToJsonIdRowMapping(file) {
     .on('data', (data) => {
       const jsonStr = data.toString('utf8');
       tempjsonObj = JSON.parse(jsonStr);
-      jsonObj.push({'id' : tempjsonObj['id'], 'row' : rowNumber});
+      // ID : ROW mapping
+      jsonObj[tempjsonObj['id']] = rowNumber;
 
       rowNumber++;
     })
@@ -71,7 +72,7 @@ function csvToJsonIdRowMappingAndCsvSplit(file) {
 
       jsonBreakDown.push(jsonStr);
       if (jsonBreakDown.length === 10000) {
-        fs.writeFile('./json/file' + count + '.json', jsonBreakDown, function(err) {
+        fs.writeFile('./json/file' + count + '.json', '[' + jsonBreakDown + ']', function(err) {
           if (err) throw err;
           console.log('Created new json file number', count);
         });
@@ -83,7 +84,7 @@ function csvToJsonIdRowMappingAndCsvSplit(file) {
     })
     .on('done', (error)=> {
       if (jsonBreakDown.length > 0) {
-        fs.writeFile('./json/file' + count + '.json', jsonBreakDown, function(err) {
+        fs.writeFile('./json/file' + count + '.json', '[' + jsonBreakDown + ']', function(err) {
           if (err) throw err;
         });
       }
