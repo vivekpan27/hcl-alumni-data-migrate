@@ -1,4 +1,3 @@
-// const csv = require("fast-csv");
 const fs = require("fs");
 const mysql = require('mysql');
 const config = require('./config');
