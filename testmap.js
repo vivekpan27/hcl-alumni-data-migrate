@@ -58,6 +58,10 @@ async.waterfall([
       if (err) throw err;
       console.log(newInsertedData);
       console.log(newUpdatedData);
+      let dbData = {};
+      dbData.insert = newInsertedData;
+      dbData.update = newUpdatedData;
+      console.log(JSON.stringify(dbData));
       console.log('Done');
     });
   }
