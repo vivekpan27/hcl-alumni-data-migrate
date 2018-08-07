@@ -2,6 +2,12 @@ const csv = require("fast-csv");
 const fs = require("fs");
 const mysql = require('mysql');
 const config = require('./config');
+const con = mysql.createConnection({
+  host: config.mysql.host,
+  user: config.mysql.user,
+  password: config.mysql.password,
+  database: config.mysql.database,
+});
 
   /* Function definitions begin. */
   function csvToArray(fileName) {
